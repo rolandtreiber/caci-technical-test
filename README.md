@@ -7,7 +7,7 @@ The application was initialised using the Spring Initializr tool and uses Maven 
 To start the database, run `$ docker-compose up` assuming that docker and docker compose are present on your machine.
 Once the database is up and running, start the application and access it on port 5555.
 
-### Testing
+### Manual Testing
 To test the API in Postman, load the **[included Postman collection](https://github.com/rolandtreiber/caci-technical-test/blob/main/CACI_tech_test_postman_collection.json)** into the app. \
 In case it is not automatically loaded, the following environment variables will be necessary: \
 base_url: [http://localhost:5555](http://localhost:5555) \
