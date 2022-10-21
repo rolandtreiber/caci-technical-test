@@ -1,0 +1,474 @@
+{
+	"info": {
+		"_postman_id": "9d2fe7be-de33-474e-9ec0-40f70d6df7a5",
+		"name": "Orders",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9064123"
+	},
+	"item": [
+		{
+			"name": "Create order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"if (jsonData.reference !== undefined) {",
+							"    pm.environment.set(\"order_reference\", jsonData.reference);",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bricks\": 16\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/order",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create order - success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 15\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"bricks\": 16,\n    \"reference\": \"H3G3DTCQO2\",\n    \"fulfilled\": false\n}"
+				},
+				{
+					"name": "Create order - validation error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 16\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"errors\": [\n        \"bricks: Field 'bricks' is mandatory\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get single order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/order/{{order_reference}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"{{order_reference}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get single order - success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 25\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"bricks\": 25,\n    \"reference\": \"FVLE3BLT2R\",\n    \"fulfilled\": false\n}"
+				},
+				{
+					"name": "Get single order - invalid reference",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"message\": \"Invalid order reference\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/order",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "List orders - success",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "[\n    {\n        \"bricks\": 15,\n        \"reference\": \"BRNDWU50W6\",\n        \"fulfilled\": false\n    },\n    {\n        \"bricks\": 15,\n        \"reference\": \"KXX1GBXKC2\",\n        \"fulfilled\": true\n    },\n    {\n        \"bricks\": 15,\n        \"reference\": \"OQIMKP3YBR\",\n        \"fulfilled\": false\n    },\n    {\n        \"bricks\": 15,\n        \"reference\": \"2WPC5N92XN\",\n        \"fulfilled\": false\n    },\n    {\n        \"bricks\": 124,\n        \"reference\": \"AJB9VXMZ8D\",\n        \"fulfilled\": true\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Update order",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bricks\": 129\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/order/{{order_reference}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"{{order_reference}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update order - success",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 129\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"bricks\": 129,\n    \"reference\": \"MRFJHJ4Q38\",\n    \"fulfilled\": false\n}"
+				},
+				{
+					"name": "Update order - updating fulfilled order error",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"message\": \"Cannot update a fulfilled order\"\n}"
+				},
+				{
+					"name": "Update order - invalid reference",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 129\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"message\": \"Invalid order reference\"\n}"
+				},
+				{
+					"name": "Update order - validation error",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bricks\": 129\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"errors\": [\n        \"bricks: Field 'bricks' is mandatory\"\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Fulfil order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/order/{{order_reference}}/fulfil",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"order",
+						"{{order_reference}}",
+						"fulfil"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Fulfil order - success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}/fulfil",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}",
+								"fulfil"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"bricks\": 16,\n    \"reference\": \"H3G3DTCQO2\",\n    \"fulfilled\": true\n}"
+				},
+				{
+					"name": "Fulfil order - already fulfilled error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/order/{{order_reference}}/fulfil",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"order",
+								"{{order_reference}}",
+								"fulfil"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\n    \"status\": \"BAD_REQUEST\",\n    \"message\": \"Order already fulfilled\"\n}"
+				}
+			]
+		}
+	]
+}
